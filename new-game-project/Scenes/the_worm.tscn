@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2gc5nrcn5tcv"]
+
+[ext_resource type="Script" uid="uid://ndshkpgtw7u5" path="res://the_worm.gd" id="1_1mitj"]
+[ext_resource type="Texture2D" uid="uid://6yyr7cydjrtd" path="res://Assets/Tilemaps/tilemap_packed.png" id="1_avctp"]
+[ext_resource type="PackedScene" uid="uid://bggbodimcp7sp" path="res://Scenes/deathzone.tscn" id="2_1mitj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfg5a"]
+atlas = ExtResource("1_avctp")
+region = Rect2(80, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u2hw"]
+atlas = ExtResource("1_avctp")
+region = Rect2(96, 80, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vttqq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gfg5a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1u2hw")
+}],
+"loop": true,
+"name": &"squirm",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1mitj"]
+radius = 0.64394
+height = 1.28788
+
+[node name="the_worm" type="Node2D"]
+position = Vector2(0, -8)
+script = ExtResource("1_1mitj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vttqq")
+animation = &"squirm"
+autoplay = "squirm"
+
+[node name="deathzone" parent="." instance=ExtResource("2_1mitj")]
+position = Vector2(1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="deathzone"]
+position = Vector2(-1, 5)
+rotation = -4.66701
+scale = Vector2(-2.89169, 6.20536)
+shape = SubResource("CapsuleShape2D_1mitj")
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, 5)
+target_position = Vector2(6, 0)
+collision_mask = 2
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, 5)
+target_position = Vector2(-6, 0)
+collision_mask = 2
