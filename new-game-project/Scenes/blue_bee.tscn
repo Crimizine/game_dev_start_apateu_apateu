@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6ptpk486lj8s"]
+
+[ext_resource type="Texture2D" uid="uid://6yyr7cydjrtd" path="res://Assets/Tilemaps/tilemap_packed.png" id="1_ahakm"]
+[ext_resource type="PackedScene" uid="uid://bggbodimcp7sp" path="res://Scenes/deathzone.tscn" id="2_sas0p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7i8l"]
+atlas = ExtResource("1_ahakm")
+region = Rect2(48, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3a0f"]
+atlas = ExtResource("1_ahakm")
+region = Rect2(64, 80, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a11nx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7i8l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3a0f")
+}],
+"loop": true,
+"name": &"buzzing",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1wver"]
+radius = 3.0
+height = 6.0
+
+[node name="blue_bee" type="Node2D"]
+position = Vector2(0, -6)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_a11nx")
+animation = &"buzzing"
+autoplay = "buzzing"
+frame_progress = 0.213077
+
+[node name="deathzone" parent="." instance=ExtResource("2_sas0p")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="deathzone"]
+shape = SubResource("CapsuleShape2D_1wver")
