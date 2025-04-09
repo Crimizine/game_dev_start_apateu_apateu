@@ -177,6 +177,7 @@ position = Vector2(120, 236)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(3, 3)
+position_smoothing_speed = 4.0
 
 [node name="deathzone" parent="." instance=ExtResource("3_6phgx")]
 position = Vector2(308, 359)
