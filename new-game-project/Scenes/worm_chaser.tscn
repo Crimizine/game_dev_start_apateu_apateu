@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://4cgjk8njmv6a"]
+
+[ext_resource type="Script" uid="uid://b7nui005nv7lv" path="res://Scripts/worm_chaser.gd" id="1_7t3f2"]
+[ext_resource type="Texture2D" uid="uid://6yyr7cydjrtd" path="res://Assets/Tilemaps/tilemap_packed.png" id="2_vhtro"]
+[ext_resource type="PackedScene" uid="uid://bggbodimcp7sp" path="res://Scenes/deathzone.tscn" id="3_vhtro"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwqup"]
+atlas = ExtResource("2_vhtro")
+region = Rect2(80, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7uerp"]
+atlas = ExtResource("2_vhtro")
+region = Rect2(96, 80, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_76vsk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwqup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7uerp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_36wjr"]
+radius = 3.0
+height = 8.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vhtro"]
+radius = 3.5625
+height = 18.0
+
+[node name="worm_chaser" type="CharacterBody2D"]
+script = ExtResource("1_7t3f2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_76vsk")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_36wjr")
+
+[node name="deathzone" parent="." instance=ExtResource("3_vhtro")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="deathzone"]
+position = Vector2(0, 5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vhtro")

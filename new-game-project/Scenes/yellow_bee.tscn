@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://disexv5jw11fo"]
+
+[ext_resource type="Texture2D" uid="uid://6yyr7cydjrtd" path="res://Assets/Tilemaps/tilemap_packed.png" id="1_8j7eo"]
+[ext_resource type="Script" uid="uid://sjkw237oum1g" path="res://Scripts/yellow_bee.gd" id="1_rlnl8"]
+[ext_resource type="PackedScene" uid="uid://bggbodimcp7sp" path="res://Scenes/deathzone.tscn" id="2_rlnl8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kopgu"]
+atlas = ExtResource("1_8j7eo")
+region = Rect2(16, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsc12"]
+atlas = ExtResource("1_8j7eo")
+region = Rect2(32, 80, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2s1xl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kopgu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bsc12")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q6nxo"]
+radius = 2.23607
+
+[node name="yellow_bee" type="Node2D"]
+script = ExtResource("1_rlnl8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2s1xl")
+autoplay = "default"
+
+[node name="deathzone" parent="." instance=ExtResource("2_rlnl8")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="deathzone"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_q6nxo")
