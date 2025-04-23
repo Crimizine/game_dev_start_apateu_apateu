@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpa6cmpniflyk"]
+
+[ext_resource type="AudioStream" uid="uid://d3v6l4v1gkipf" path="res://Assets/Audio/Music/8 Bit World! Fun Upbeat Chiptune Game Music by HeatleyBros.mp3" id="1_pigtt"]
+[ext_resource type="Script" uid="uid://8kcahpncfdal" path="res://Scripts/background_music.gd" id="2_bgk36"]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer"]
+stream = ExtResource("1_pigtt")
+autoplay = true
+script = ExtResource("2_bgk36")
